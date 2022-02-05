@@ -1,18 +1,26 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
+import revertPath from './lib/revertPath';
+import * as fs from 'fs';
 import * as vscode from 'vscode';
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
 	let disposable = vscode.commands.registerCommand('fast-spec.toggleSpec', () => {
-		const workspaceName = vscode.workspace.name;
+		const activeFile = vscode.window.activeTextEditor;
 
-		vscode.window.showInformationMessage('Check!');
+		if(!activeFile) {
+			return;
+		}
+		const activeFilePath = activeFile.document.fileName;
+		const uri = vscode.Uri.file(revertPath(activeFilePath));
+
+		let fileExist = true;
+		fs.access(uri.fsPath, ()=>{ fileExist = false; });
+
+		if (!fileExist) {	return; }
+
+		vscode.workspace.openTextDocument(uri.fsPath).then(vscode.window.showTextDocument);
 	});
 
 	context.subscriptions.push(disposable);
 }
 
-// this method is called when your extension is deactivated
 export function deactivate() {}

@@ -31,8 +31,8 @@
     "pretest": "yarn run compile && yarn run lint",
     "lint": "eslint src --ext ts",
     "test": "node ./out/test/runTest.js",
-    "testlib": "npx swc src --out-dir out && yarn run mocha ./out-dir/test/suite/lib",
-    "tsctest": "yarn run compile && yarn run mocha ./out-dir/test/suite/lib"
+    "testlib": "npx swc src --out-dir out && yarn run mocha ./out/test/suite/lib",
+    "tsctest": "yarn run compile && yarn run mocha ./out/test/suite/lib"
   },
   "devDependencies": {
     "@swc/cli": "^0.1.55",
