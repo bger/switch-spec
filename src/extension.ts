@@ -13,7 +13,20 @@ export function activate(context: vscode.ExtensionContext) {
 		const uri = vscode.Uri.file(revertPath(activeFilePath));
 
 		let fileExist = true;
-		fs.access(uri.fsPath, ()=>{ fileExist = false; });
+
+		try {
+			fs.accessSync(uri.fsPath);
+		} catch (e) {
+			fileExist = false;
+
+			if(uri.fsPath.match(/_spec\.rb/)) {
+				let edit = new vscode.WorkspaceEdit();
+				edit.createFile(uri, {ignoreIfExists: true});
+				vscode.workspace.applyEdit(edit).then(() => {
+					vscode.workspace.openTextDocument(uri.fsPath).then(vscode.window.showTextDocument);
+				});
+			}
+		};
 
 		if (!fileExist) {	return; }
 
