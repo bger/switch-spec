@@ -19,7 +19,7 @@
       {
         "command": "fast-spec.toggleSpec",
         "key": "ctrl+.",
-        "mac": "cmd+'",
+        "mac": "cmd+.",
         "when": "editorTextFocus"
       }
     ]

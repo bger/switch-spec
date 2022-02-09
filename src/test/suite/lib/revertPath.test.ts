@@ -12,21 +12,43 @@ describe('revertPath', () => {
     });
   });
 
-  context('when path matches class definition path', () => {
-    it('returns spec path', () => {
-      const classPath = "/Users/bernyg/projects/dummy/app/services/charity/money.rb";
-      const specPath = "/Users/bernyg/projects/dummy/spec/services/charity/money_spec.rb";
+  context('for app/ directories', () => {
+    context('when path matches class definition path', () => {
+      it('returns spec path', () => {
+        const classPath = "/Users/bernyg/projects/dummy/app/services/charity/money.rb";
+        const specPath = "/Users/bernyg/projects/dummy/spec/services/charity/money_spec.rb";
 
-      assert.strictEqual(revertPath(classPath), specPath);
+        assert.strictEqual(revertPath(classPath), specPath);
+      });
+    });
+
+    context('when path matches spec definition path', () => {
+      it('returns class definition path', () => {
+        const specPath = "/Users/bernyg/projects/dummy/spec/services/charity/money_spec.rb";
+        const classPath = "/Users/bernyg/projects/dummy/app/services/charity/money.rb";
+
+        assert.strictEqual(revertPath(specPath), classPath);
+      });
     });
   });
 
-  context('when path matches spec definition path', () => {
-    it('returns class definition path', () => {
-      const specPath = "/Users/bernyg/projects/dummy/spec/services/charity/money_spec.rb";
-      const classPath = "/Users/bernyg/projects/dummy/app/services/charity/money.rb";
+  context('for lib/ directories', () => {
+    context('when path matches class definition path', () => {
+      it('returns spec path', () => {
+        const classPath = "/Users/bernyg/projects/dummy/lib/services/charity/money.rb";
+        const specPath = "/Users/bernyg/projects/dummy/spec/lib/services/charity/money_spec.rb";
 
-      assert.strictEqual(revertPath(specPath), classPath);
+        assert.strictEqual(revertPath(classPath), specPath);
+      });
+    });
+
+    context('when path matches spec definition path', () => {
+      it('returns class definition path', () => {
+        const specPath = "/Users/bernyg/projects/dummy/spec/lib/services/charity/money_spec.rb";
+        const classPath = "/Users/bernyg/projects/dummy/lib/services/charity/money.rb";
+
+        assert.strictEqual(revertPath(specPath), classPath);
+      });
     });
   });
 });
