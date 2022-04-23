@@ -1,6 +1,6 @@
-# fast-spec README
+# switch-spec README
 
-This is the README for your extension "fast-spec". After writing up a brief description, we recommend including the following sections.
+This is the README for your extension "switch-spec". After writing up a brief description, we recommend including the following sections.
 
 ## Features
 

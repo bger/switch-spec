@@ -2,7 +2,7 @@ import * as vscode from 'vscode';
 import { switchEditor } from './lib/controller';
 
 export function activate(context: vscode.ExtensionContext) {
-  let disposable = vscode.commands.registerCommand('fast-spec.toggleSpec', () => {
+  let disposable = vscode.commands.registerCommand('switch-spec.toggleSpec', () => {
     const activeFile = vscode.window.activeTextEditor;
 
     if(!activeFile) { return; }
